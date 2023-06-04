@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cress.Model
+{
+    public class User
+    {
+        public string Username { get; set; }
+        private string Password { get; set; }
+        private string Email { get; set; }
+        public Image ProfilePicture { get; set; }
+        private List<ChatRoom> ChatRooms { get; set; }
+
+    }
+}
