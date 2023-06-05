@@ -16,10 +16,7 @@ namespace Cress
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var view = new View.Login();
-            var model = new Model.LoginModel();
-            var presenter = new Presenter.LoginPresenter(view, model);
-            Application.Run(view);
+            Application.Run(new Main());
         }
     }
 }

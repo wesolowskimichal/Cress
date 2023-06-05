@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 namespace Cress
 {
-    public partial class Form1 : Form
+    public partial class App : Form
     {
-        public Form1()
+        public App()
         {
             InitializeComponent();
-            View.Login loginForm = new View.Login();
-            loginForm.Show();
+            var model = new Model.LoginModel();
+            var view = new View.AppLoginView();
+            var presenter = new Presenter.LoginPresenter(view, model);
         }
     }
 }

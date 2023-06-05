@@ -1,6 +1,4 @@
-﻿using Cress.Model;
-using Cress.Presenter;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Cress.View
 {
-    public partial class Login : Form, ILoginView
+    public partial class AppLoginView : UserControl, ILoginView
     {
         #region implementation of ILoginView
         public string Email => textBox_email.Text;
@@ -26,7 +23,7 @@ namespace Cress.View
         public event Action ShowPassword;
 
         #endregion
-        public Login()
+        public AppLoginView()
         {
             InitializeComponent();
         }

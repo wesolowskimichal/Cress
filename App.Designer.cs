@@ -1,6 +1,6 @@
 ﻿namespace Cress
 {
-    partial class Form1
+    partial class App
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
@@ -28,13 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(App));
+            this.appLoginView1 = new Cress.View.AppLoginView();
+            this.SuspendLayout();
+            // 
+            // appLoginView1
+            // 
+            this.appLoginView1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("appLoginView1.BackgroundImage")));
+            this.appLoginView1.Location = new System.Drawing.Point(0, 0);
+            this.appLoginView1.Name = "appLoginView1";
+            this.appLoginView1.Size = new System.Drawing.Size(1366, 768);
+            this.appLoginView1.TabIndex = 0;
+            // 
+            // App
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.appLoginView1);
+            this.Name = "App";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private View.AppLoginView appLoginView1;
     }
 }
 
