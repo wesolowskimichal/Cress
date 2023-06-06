@@ -58,6 +58,7 @@
     <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
+    <Compile Include="Presenter\UserSettingsPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ILoginView.cs" />
@@ -72,6 +73,24 @@
     </Compile>
     <Compile Include="View\src\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserSettings\ChangeEmailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UserSettings\ChangeEmailDialog.Designer.cs">
+      <DependentUpon>ChangeEmailDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserSettings\ChangePasswordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UserSettings\ChangePasswordDialog.Designer.cs">
+      <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserSettings\UserSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UserSettings\UserSettings.Designer.cs">
+      <DependentUpon>UserSettings.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,6 +107,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\src\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserSettings\ChangeEmailDialog.resx">
+      <DependentUpon>ChangeEmailDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserSettings\ChangePasswordDialog.resx">
+      <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserSettings\UserSettings.resx">
+      <DependentUpon>UserSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
