@@ -13,7 +13,7 @@ namespace Cress.Presenter
     {
         private readonly User _user;
         private readonly UserSettings _view;
-        public UserSettingsPresenter(User user, UserSettings view)
+        public UserSettingsPresenter(UserSettings view, User user)
         {
             _user = user;
             _view = view;
