@@ -1,6 +1,6 @@
 ﻿namespace Cress.View.ChatRoom
 {
-    partial class ChatRoom
+    partial class ChatRoomView
     {
         /// <summary> 
         /// Wymagana zmienna projektanta.

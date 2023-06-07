@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace Cress.View.ChatRoom
 {
-    public partial class ChatRoom : UserControl
+    public partial class ChatRoomView : UserControl
     {
-        public ChatRoom()
+        public ChatRoomView()
         {
             InitializeComponent();
+            /// wypełniacz żeby bylo widać jak to sobie wymyśliłem
             chat_Panel.Controls.Add(new Label { Text = "                                                                              ", AutoSize = true, Visible = true });
             for (int i = 0; i < 100; i++)
             {
@@ -23,11 +24,11 @@ namespace Cress.View.ChatRoom
                 var x = new Label { Text = $"new message (you) {i}", BackColor = Color.FromArgb(204, 255, 255), AutoSize = true, Anchor = AnchorStyles.Right };
                 chat_Panel.Controls.Add(x);
             }
-            //to sie nam scroluje na sam dół
             chat_Panel.ScrollControlIntoView(chat_Panel.Controls[chat_Panel.Controls.Count - 1]);
+            ///
         }
 
-        public event Action<string> SendNewMessage;
+        public event Action<int, string> SendNewMessage;
         public event Action<int> LoadChat;
 
         private void chatRoom_List_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,9 +42,9 @@ namespace Cress.View.ChatRoom
 
         private void send_Btn_Click(object sender, EventArgs e)
         {
-            if (new_message_In.Text.Length > 0)
+            if (new_message_In.Text.Length > 0 && chatRoom_List.SelectedIndex!=-1)
             {
-                SendNewMessage?.Invoke(new_message_In.Text);
+                SendNewMessage?.Invoke(chatRoom_List.SelectedIndex, new_message_In.Text);
                 //add new message
 
                 //clear input
@@ -53,16 +54,31 @@ namespace Cress.View.ChatRoom
 
         // publiczne metody
 
-        public void set_chatRoom_List(List<ChatRoom> chatRooms)
+        public void set_chatRoom_List(List<Model.ChatRoom> chatRooms)
         {
-            foreach (ChatRoom chatRoom in chatRooms)
+            foreach (Model.ChatRoom chatRoom in chatRooms)
             {
                 chatRoom_List.Items.Add(chatRoom.ToString());
             }
         }
 
-        public void set_chat_Panel(List<Model.Message> messages, string current_user)
+        public void add_to_chatPanel(Model.Message message, string current_user)
         {
+            if (message.Sender.Username == current_user)
+            {
+                chat_Panel.Controls.Add(new Label { Text = $"{message.Content}", BackColor = Color.FromArgb(204, 255, 255), AutoSize = true, Anchor = AnchorStyles.Right });
+            }
+            else
+            {
+                chat_Panel.Controls.Add(new Label { Text = $"{message.Sender.Username}", AutoSize = true });
+                chat_Panel.Controls.Add(new Label { Text = $"{message.Content}", BackColor = Color.FromArgb(224, 224, 224), AutoSize = true });
+            }
+        }
+
+        public void set_chatPanel(List<Model.Message> messages, string current_user)
+        {
+            //nastepna linijka jest tylko po to żeby widok czatu sie dobrze formatował xd
+            chat_Panel.Controls.Add(new Label { Text = "                                                                        ", AutoSize = true, Visible = true });
             foreach (Model.Message message in messages)
             {
                 if (message.Sender.Username == current_user)
