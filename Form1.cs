@@ -15,8 +15,12 @@ namespace Cress
         public Form1()
         {
             InitializeComponent();
-            View.Login loginForm = new View.Login();
-            loginForm.Show();
+            /*            View.Login loginForm = new View.Login();
+                        loginForm.Show();*/
+
+            var x = new View.ChatRoom.ChatRoom();
+            x.Parent = this;
+            x.Show();
         }
     }
 }

@@ -16,15 +16,15 @@ namespace Cress
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-/*            var view = new View.Login();
-            var model = new Model.LoginModel();
-            var presenter = new Presenter.LoginPresenter(view, model);
-            Application.Run(view);*/
+            /*            var view = new View.Login();
+                        var model = new Model.LoginModel();
+                        var presenter = new Presenter.LoginPresenter(view, model);
+                        Application.Run(view);*/
             //to mi sluzy do stestowania co działa w nowym widoku
             var view = new View.UserSettings.UserSettings();
             var model = new Model.User();
             var presenter = new Presenter.UserSettingsPresenter(view, model);
-            Application.Run(view);
+            Application.Run(new Form1());
         }
     }
 }
