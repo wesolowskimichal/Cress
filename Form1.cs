@@ -18,7 +18,7 @@ namespace Cress
             /*            View.Login loginForm = new View.Login();
                         loginForm.Show();*/
 
-            var x = new View.ChatRoom.ChatRoom();
+            var x = new View.ChatRoom.ChatRoomView();
             x.Parent = this;
             x.Show();
         }

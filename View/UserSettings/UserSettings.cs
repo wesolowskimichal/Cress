@@ -65,6 +65,8 @@ namespace Cress.View.UserSettings
         // publiczne metody do ustwiania pól przez prezenter
         public void pictureBox_Set(Image picture)
         {
+            //TODO
+            //resize picture to 500px by height
             pictureBox.Image = picture;
         }
 
@@ -93,7 +95,5 @@ namespace Cress.View.UserSettings
         {
             ChangeUserEmail?.Invoke(email);
         }
-
-
     }
 }
