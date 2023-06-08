@@ -11,17 +11,17 @@ using System.Windows.Forms;
 
 namespace Cress.View.UserSettings
 {
-    public partial class UserSettings : Form
+    public partial class UserSettings : UserControl
     {
         public event Action DeleteUser;
         public event Action<string, string> ChangeUserPassword;
         public event Action<string> ChangeUserEmail;
         public event Action<string> ChangeUserPicture;
+
         public UserSettings()
         {
             InitializeComponent();
         }
-
         private void delUser_btn_Click(object sender, EventArgs e)
         {
             DeleteUser?.Invoke();
@@ -45,7 +45,6 @@ namespace Cress.View.UserSettings
                 ChangeUserPicture?.Invoke(Path.GetFullPath(filePath));
             }
         }
-
         private void chngEmail_btn_Click(object sender, EventArgs e)
         {
             //TODO
