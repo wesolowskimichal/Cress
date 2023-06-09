@@ -11,6 +11,7 @@ namespace Cress.View
         string Email { get; }
         string Password { get; }
         System.Windows.Forms.TextBox PasswordTextBox { get; }
+        System.Windows.Forms.Label LoginErrorLabel { get; }
 
         event Action LoginButtonClick;
         event Action ShowPassword;

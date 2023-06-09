@@ -13,11 +13,12 @@ namespace Cress.View
     public partial class LoginViewController : UserControl, ILoginView
     {
         #region implementation of ILoginView
-        public string Email => textBox_email.Text;
 
+        public string Email => textBox_email.Text;
         public string Password => textBox_password.Text;
 
         public System.Windows.Forms.TextBox PasswordTextBox => textBox_password;
+        public System.Windows.Forms.Label LoginErrorLabel => label_logError;
 
         public event Action LoginButtonClick;
         public event Action ShowPassword;

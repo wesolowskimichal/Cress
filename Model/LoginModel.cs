@@ -10,7 +10,11 @@ namespace Cress.Model
     {
         public bool Authenticate(string username, string password)
         {
-            return true;
+            DBManager dBManager = DBManager.Instance;
+            if (dBManager.ExecuteQueryGetCount($"SELECT COUNT(*) FROM users WHERE username = '{username}' AND password = '{password}'") == 1)
+                return true;
+            return false;
+
         }
     }
 }

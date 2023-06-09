@@ -34,6 +34,7 @@
             this.textBox_password = new System.Windows.Forms.TextBox();
             this.label_password = new System.Windows.Forms.Label();
             this.label_email = new System.Windows.Forms.Label();
+            this.label_logError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button_showPass
@@ -107,11 +108,22 @@
             this.label_email.Text = "Email";
             this.label_email.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label_logError
+            // 
+            this.label_logError.AutoSize = true;
+            this.label_logError.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.label_logError.Font = new System.Drawing.Font("Constantia", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label_logError.Location = new System.Drawing.Point(509, 435);
+            this.label_logError.Name = "label_logError";
+            this.label_logError.Size = new System.Drawing.Size(0, 26);
+            this.label_logError.TabIndex = 14;
+            // 
             // LoginViewController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Cress.Properties.Resources.background_login;
+            this.Controls.Add(this.label_logError);
             this.Controls.Add(this.button_showPass);
             this.Controls.Add(this.button_login);
             this.Controls.Add(this.textBox_email);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.TextBox textBox_password;
         private System.Windows.Forms.Label label_password;
         private System.Windows.Forms.Label label_email;
+        private System.Windows.Forms.Label label_logError;
     }
 }

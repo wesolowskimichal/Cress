@@ -31,9 +31,11 @@ namespace Cress.Presenter
 
             if (isAuthenticated)
             {
+                Console.WriteLine("TES");
             }
             else
             {
+                view.LoginErrorLabel.Text = "Wrong email or password!";
             }
         }
 
