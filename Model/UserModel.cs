@@ -11,7 +11,7 @@ namespace Cress.Model
     {
         public string Username { get; set; }
         private string Password { get; set; }
-        private string Email { get; set; }
+        public string Email { get; set; }
         public Image ProfilePicture { get; set; }
         private List<ChatRoom> ChatRooms { get; set; }
 
