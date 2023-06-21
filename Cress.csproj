@@ -112,6 +112,7 @@
     <Compile Include="View\ChatRoom\ChatRoomView.Designer.cs">
       <DependentUpon>ChatRoomView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ChatRoom\IChatRoomView.cs" />
     <Compile Include="View\ILoginView.cs" />
     <Compile Include="View\LoginViewController.cs">
       <SubType>UserControl</SubType>

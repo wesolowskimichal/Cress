@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.loginViewController1 = new Cress.View.LoginViewController();
+            this.chatRoomView1 = new Cress.View.ChatRoom.ChatRoomView();
             this.SuspendLayout();
             // 
             // loginViewController1
@@ -40,21 +41,34 @@
             this.loginViewController1.Size = new System.Drawing.Size(1366, 768);
             this.loginViewController1.TabIndex = 0;
             // 
+            // chatRoomView1
+            // 
+            this.chatRoomView1.AutoScroll = true;
+            this.chatRoomView1.AutoSize = true;
+            this.chatRoomView1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.chatRoomView1.Location = new System.Drawing.Point(354, 104);
+            this.chatRoomView1.Name = "chatRoomView1";
+            this.chatRoomView1.Size = new System.Drawing.Size(700, 465);
+            this.chatRoomView1.TabIndex = 1;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.chatRoomView1);
             this.Controls.Add(this.loginViewController1);
             this.Name = "Main";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private View.LoginViewController loginViewController1;
+        private View.ChatRoom.ChatRoomView chatRoomView1;
     }
 }
 

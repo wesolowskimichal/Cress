@@ -15,10 +15,12 @@ namespace Cress.Presenter
     {
         private readonly ILoginView view;
         private readonly LoginModel loginModel;
-        public LoginPresenter(ILoginView view, LoginModel model)
+        private readonly Main main;
+        public LoginPresenter(ILoginView view, LoginModel model, Main main)
         {
             this.view = view;
             this.loginModel = model;
+            this.main = main;
             view.LoginButtonClick += view_Login;
             view.ShowPassword += show_Password;
         }
@@ -31,7 +33,8 @@ namespace Cress.Presenter
 
             if (isAuthenticated)
             {
-                Console.WriteLine("TES");
+                main.user = DBManager.Instance.GetUser(email, password);
+                main.LoggedIn();
             }
             else
             {

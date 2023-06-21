@@ -9,7 +9,6 @@ namespace Cress.Model
     public class Message
     {
         public User Sender { get; set; }
-        public User Receiver { get; set; }
         public string Content { get; set; }
         public DateTime Timestamp { get; set; }
 

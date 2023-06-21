@@ -10,13 +10,20 @@ using System.Windows.Forms;
 
 namespace Cress.View.ChatRoom
 {
-    public partial class ChatRoomView : UserControl
+    public partial class ChatRoomView : UserControl, IChatRoomView
     {
+        #region Implementation of IChatRoomView
+        public ListBox ChatRoom_List => chatRoom_List;
+        public FlowLayoutPanel Chat_Panel => chat_Panel;
+
+        public event Action<int, string> SendNewMessage;
+        public event Action<long> LoadChat;
+        #endregion
         public ChatRoomView()
         {
             InitializeComponent();
-            /// wypełniacz żeby bylo widać jak to sobie wymyśliłem
-            chat_Panel.Controls.Add(new Label { Text = "                                                                              ", AutoSize = true, Visible = true });
+            /// wypełniacz żeby bylo widać jak to s obie wymyśliłem
+            /*chat_Panel.Controls.Add(new Label { Text = "                                                                              ", AutoSize = true, Visible = true });
             for (int i = 0; i < 100; i++)
             {
                 chat_Panel.Controls.Add(new Label { Text = $"Other user", AutoSize = true });
@@ -24,19 +31,17 @@ namespace Cress.View.ChatRoom
                 var x = new Label { Text = $"new message (you) {i}", BackColor = Color.FromArgb(204, 255, 255), AutoSize = true, Anchor = AnchorStyles.Right };
                 chat_Panel.Controls.Add(x);
             }
-            chat_Panel.ScrollControlIntoView(chat_Panel.Controls[chat_Panel.Controls.Count - 1]);
+            chat_Panel.ScrollControlIntoView(chat_Panel.Controls[chat_Panel.Controls.Count - 1]);*/
             ///
         }
-
-        public event Action<int, string> SendNewMessage;
-        public event Action<int> LoadChat;
 
         private void chatRoom_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             int position = chatRoom_List.SelectedIndex;
             if (position != -1)
             {
-                LoadChat?.Invoke(position);
+                Model.ChatRoom cr = chatRoom_List.SelectedItem as Model.ChatRoom;
+                LoadChat?.Invoke(cr.Id);
             }
         }
 
@@ -54,15 +59,15 @@ namespace Cress.View.ChatRoom
 
         // publiczne metody
 
-        public void set_chatRoom_List(List<Model.ChatRoom> chatRooms)
+        /*public void set_chatRoom_List(List<Model.ChatRoom> chatRooms)
         {
             foreach (Model.ChatRoom chatRoom in chatRooms)
             {
-                chatRoom_List.Items.Add(chatRoom.ToString());
+                chatRoom_List.Items.Add(chatRoom);
             }
-        }
+        }*/
 
-        public void add_to_chatPanel(Model.Message message, string current_user)
+       /* public void add_to_chatPanel(Model.Message message, string current_user)
         {
             if (message.Sender.Username == current_user)
             {
@@ -78,6 +83,7 @@ namespace Cress.View.ChatRoom
         public void set_chatPanel(List<Model.Message> messages, string current_user)
         {
             //nastepna linijka jest tylko po to żeby widok czatu sie dobrze formatował xd
+            chat_Panel.Controls.Clear();
             chat_Panel.Controls.Add(new Label { Text = "                                                                        ", AutoSize = true, Visible = true });
             foreach (Model.Message message in messages)
             {
@@ -93,6 +99,6 @@ namespace Cress.View.ChatRoom
                 //scroll down
                 chat_Panel.ScrollControlIntoView(chat_Panel.Controls[chat_Panel.Controls.Count - 1]);
             }
-        }
+        }*/
     }
 }
