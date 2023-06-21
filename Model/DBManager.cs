@@ -116,95 +116,7 @@ namespace Cress.Model
             return user;
         }
 
-        public List<Model.ChatRoom> GetChatRoomsByUserID(long id)
-        {
-            List<ChatRoom> chatRooms = new List<ChatRoom>();
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string chatRoomQuery = @"SELECT cr.id, cr.name 
-                                     FROM chat_room cr 
-                                     INNER JOIN conversation_participants cp ON cr.id = cp.chat_room_id
-                                     WHERE cp.user_id = @userId";
-
-                using (MySqlCommand chatRoomCommand = new MySqlCommand(chatRoomQuery, connection))
-                {
-                    chatRoomCommand.Parameters.AddWithValue("@userId", id);
-
-                    using (MySqlDataReader chatRoomReader = chatRoomCommand.ExecuteReader())
-                    {
-                        while (chatRoomReader.Read())
-                        {
-                            ChatRoom chatRoom = new ChatRoom
-                            {
-                                Id = chatRoomReader.GetInt32(0),
-                                Name = chatRoomReader.GetString(1),
-                                Messages = new List<Message>(),
-                                Participants = new List<User>()
-                            };
-
-                            string messageQuery = @"SELECT id, chat_room_id, sender_id, message_text, sent_at
-                                                 FROM messages
-                                                 WHERE chat_room_id = @chatRoomId";
-
-                            using (MySqlCommand messageCommand = new MySqlCommand(messageQuery, connection))
-                            {
-                                messageCommand.Parameters.AddWithValue("@chatRoomId", chatRoom.Id);
-
-                                using (MySqlDataReader messageReader = messageCommand.ExecuteReader())
-                                {
-                                    while (messageReader.Read())
-                                    {
-                                        Message message = new Message
-                                        {
-                                            //Id = messageReader.GetInt32(0),
-                                            //ChatRoomId = messageReader.GetInt32(1),
-                                            Sender = GetUser((long)messageReader["id"]),
-                                            Content = (string)messageReader["message_text"],
-                                            Timestamp = (DateTime)messageReader["sent_at"]
-                                        };
-
-                                        chatRoom.Messages.Add(message);
-                                    }
-                                }
-                            }
-
-                            string participantQuery = @"SELECT u.id, u.username, u.password
-                                                     FROM users u
-                                                     INNER JOIN conversation_participants cp ON u.id = cp.user_id
-                                                     WHERE cp.chat_room_id = @chatRoomId";
-
-                            using (MySqlCommand participantCommand = new MySqlCommand(participantQuery, connection))
-                            {
-                                participantCommand.Parameters.AddWithValue("@chatRoomId", chatRoom.Id);
-
-                                using (MySqlDataReader participantReader = participantCommand.ExecuteReader())
-                                {
-                                    while (participantReader.Read())
-                                    {
-                                        User participant = new User
-                                        {
-                                            Id = participantReader.GetInt32(0),
-                                            Username = participantReader.GetString(1),
-                                        };
-
-                                        chatRoom.Participants.Add(participant);
-                                    }
-                                }
-                            }
-
-                            chatRooms.Add(chatRoom);
-                        }
-                    }
-                }
-            }
-
-            return chatRooms;
-        }
-
-        public List<ChatRoom> asdsad(long userId)
+        public List<ChatRoom> GetChatRoomsByUserID(long userId)
         {
             List<ChatRoom> chatRooms = new List<ChatRoom>();
 
@@ -248,7 +160,7 @@ namespace Cress.Model
                     string messageQuery = @"SELECT id, chat_room_id, sender_id, message_text, sent_at
                                              FROM messages
                                              WHERE chat_room_id = @chatRoomId
-                                             ORDER BY messages.sent_at ASC";
+                                             ORDER BY messages.sent_at DESC";
 
                     using (MySqlCommand messageCommand = new MySqlCommand(messageQuery, connection))
                     {
@@ -297,6 +209,27 @@ namespace Cress.Model
             }
 
             return chatRooms;
+        }
+
+        public void SendMessage(Model.ChatRoom chatRoom, Model.User sender, string message)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"INSERT INTO messages (chat_room_id, sender_id, message_text, sent_at)
+                             VALUES (@chatRoomId, @senderId, @messageText, @sentAt)";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@chatRoomId", chatRoom.Id);
+                    command.Parameters.AddWithValue("@senderId", sender.Id);
+                    command.Parameters.AddWithValue("@messageText", message);
+                    command.Parameters.AddWithValue("@sentAt", DateTime.UtcNow);
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
