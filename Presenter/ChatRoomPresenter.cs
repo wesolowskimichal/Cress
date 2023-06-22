@@ -56,12 +56,12 @@ namespace Cress.Presenter
                 {
                     if (message.Sender.Id == _user.Id)
                     {
-                        _view.Chat_Panel.Controls.Add(new Label { Text = $"{message.Content}", BackColor = Color.FromArgb(204, 255, 255), AutoSize = true, Anchor = AnchorStyles.Right });
+                        _view.Chat_Panel.Controls.Add(new Label { Text = $"{message.Content}", BackColor = Color.FromArgb(204, 255, 255), AutoSize = true, Anchor = AnchorStyles.Right, MaximumSize = new Size { Width = _view.Chat_Panel.Width } }) ;
                     }
                     else
                     {
                         _view.Chat_Panel.Controls.Add(new Label { Text = $"{message.Sender.Username}", AutoSize = true });
-                        _view.Chat_Panel.Controls.Add(new Label { Text = $"{message.Content}", BackColor = Color.FromArgb(224, 224, 224), AutoSize = true });
+                        _view.Chat_Panel.Controls.Add(new Label { Text = $"{message.Content}", BackColor = Color.FromArgb(224, 224, 224), AutoSize = true, MaximumSize = new Size { Width = _view.Chat_Panel.Width } });
                     }
 
                     //_view.Chat_Panel.ScrollControlIntoView(_view.Chat_Panel.Controls[_view.Chat_Panel.Controls.Count - 1]);
