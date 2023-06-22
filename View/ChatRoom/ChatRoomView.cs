@@ -16,9 +16,14 @@ namespace Cress.View.ChatRoom
         #region Implementation of IChatRoomView
         public ListBox ChatRoom_List => chatRoom_List;
         public FlowLayoutPanel Chat_Panel => chat_Panel;
+        public int CurrentChatRoomIdx => chatRoom_List.SelectedIndex;
 
         public event Action<Model.ChatRoom, string> SendNewMessage;
         public event Action<Model.ChatRoom> LoadChat;
+        public void Invoke(Action action)
+        {
+            this.BeginInvoke(action);
+        }
         #endregion
 
         public ChatRoomView()

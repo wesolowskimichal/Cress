@@ -160,7 +160,7 @@ namespace Cress.Model
                     string messageQuery = @"SELECT id, chat_room_id, sender_id, message_text, sent_at
                                              FROM messages
                                              WHERE chat_room_id = @chatRoomId
-                                             ORDER BY messages.sent_at DESC";
+                                             ORDER BY messages.sent_at ASC";
 
                     using (MySqlCommand messageCommand = new MySqlCommand(messageQuery, connection))
                     {
@@ -225,11 +225,67 @@ namespace Cress.Model
                     command.Parameters.AddWithValue("@chatRoomId", chatRoom.Id);
                     command.Parameters.AddWithValue("@senderId", sender.Id);
                     command.Parameters.AddWithValue("@messageText", message);
-                    command.Parameters.AddWithValue("@sentAt", DateTime.UtcNow);
+                    command.Parameters.AddWithValue("@sentAt", DateTime.Now);
 
                     command.ExecuteNonQuery();
                 }
             }
+        } 
+
+        public List<Message> GetNewMessages(long userId, long chatRoomId)
+        {
+            List<Message> newMessages = new List<Message>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT m.id, m.chat_room_id, m.sender_id, m.message_text, m.sent_at
+                         FROM messages m
+                         INNER JOIN conversation_participants cp ON m.chat_room_id = cp.chat_room_id
+                         WHERE cp.user_id = @userId AND m.chat_room_id = @chatRoomId AND m.sent_at > (
+                             SELECT COALESCE(MAX(cm.last_checked), '2000-01-01') -- Assuming a default date for initial checking
+                             FROM chatroom_metadata cm
+                             WHERE cm.chat_room_id = m.chat_room_id AND cm.user_id = @userId
+                         )";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@chatRoomId", chatRoomId);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Message message = new Message
+                            {
+                                Sender = GetUser(reader.GetInt32("sender_id")),
+                                Content = reader.GetString("message_text"),
+                                Timestamp = reader.GetDateTime("sent_at")
+                            };
+
+                            newMessages.Add(message);
+                        }
+                    }
+                }
+
+                if (newMessages.Count > 0)
+                {
+                    string updateQuery = @"INSERT INTO chatroom_metadata (user_id, chat_room_id, last_checked)
+                                   VALUES (@userId, @chatRoomId, NOW())
+                                   ON DUPLICATE KEY UPDATE last_checked = NOW()";
+
+                    using (MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection))
+                    {
+                        updateCommand.Parameters.AddWithValue("@userId", userId);
+                        updateCommand.Parameters.AddWithValue("@chatRoomId", chatRoomId);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            return newMessages;
         }
     }
 }

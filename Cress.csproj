@@ -157,6 +157,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\ChatRoom\ChatRoomView.resx">
+      <DependentUpon>ChatRoomView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LoginViewController.resx">
       <DependentUpon>LoginViewController.cs</DependentUpon>
     </EmbeddedResource>

@@ -36,16 +36,16 @@
             // 
             // new_message_In
             // 
-            this.new_message_In.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.new_message_In.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.new_message_In.Location = new System.Drawing.Point(269, 440);
+            this.new_message_In.Location = new System.Drawing.Point(247, 440);
             this.new_message_In.Name = "new_message_In";
-            this.new_message_In.Size = new System.Drawing.Size(347, 20);
+            this.new_message_In.Size = new System.Drawing.Size(369, 20);
             this.new_message_In.TabIndex = 2;
             // 
             // send_Btn
             // 
-            this.send_Btn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.send_Btn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.send_Btn.AutoSize = true;
             this.send_Btn.Location = new System.Drawing.Point(622, 439);
@@ -58,22 +58,22 @@
             // 
             // chat_Panel
             // 
-            this.chat_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.chat_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chat_Panel.AutoScroll = true;
             this.chat_Panel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.chat_Panel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.chat_Panel.Location = new System.Drawing.Point(269, 40);
+            this.chat_Panel.Location = new System.Drawing.Point(247, 40);
             this.chat_Panel.Name = "chat_Panel";
-            this.chat_Panel.Size = new System.Drawing.Size(428, 393);
+            this.chat_Panel.Size = new System.Drawing.Size(450, 393);
             this.chat_Panel.TabIndex = 4;
             this.chat_Panel.WrapContents = false;
             // 
             // chatRoom_List
             // 
-            this.chatRoom_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.chatRoom_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chatRoom_List.FormattingEnabled = true;
             this.chatRoom_List.Location = new System.Drawing.Point(3, 40);

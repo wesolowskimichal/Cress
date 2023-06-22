@@ -10,7 +10,11 @@ namespace Cress.View.ChatRoom
     {
         System.Windows.Forms.ListBox ChatRoom_List { get; }
         System.Windows.Forms.FlowLayoutPanel Chat_Panel { get; }
+        int CurrentChatRoomIdx { get; }
+
         event Action<Model.ChatRoom, string> SendNewMessage;
         event Action<Model.ChatRoom> LoadChat;
+
+        void Invoke(Action action);
     }
 }
