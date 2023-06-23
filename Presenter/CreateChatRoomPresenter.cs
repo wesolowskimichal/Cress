@@ -38,7 +38,8 @@ namespace Cress.Presenter
             _users = GetUsers();
 
             _view.CreateNewChatRoom += CreateNewChatRoom;
-
+            _view.LeaveChatRoom += LeaveChatRoom;
+            _view.UpdateChatRoom += UpdateChatRoom;
             //load chats
             _view.SetChatListBox(_chatRooms);
             _view.SetUserListBox(_users);
@@ -54,8 +55,24 @@ namespace Cress.Presenter
             // refresh view
             _chatRooms = GetChatRooms();
             _view.SetChatListBox(_chatRooms);
+        }
 
+        private void LeaveChatRoom(int listId)
+        {
+            var chatRoomId = _chatRooms[listId].Id;
+            DBManager.Instance.LeaveChatRoom(chatRoomId, _user.Id);
 
+            _chatRooms = GetChatRooms();
+            _view.SetChatListBox(_chatRooms);
+        }
+
+        private void UpdateChatRoom(int listId, string name)
+        {
+            var chatRoomId = _chatRooms[listId].Id;
+            DBManager.Instance.UpdateChatRoom(chatRoomId, name);
+
+            _chatRooms = GetChatRooms();
+            _view.SetChatListBox(_chatRooms);
         }
     }
 }
