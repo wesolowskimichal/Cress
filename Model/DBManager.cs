@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Collections;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Cress.Model
 {
@@ -371,6 +372,41 @@ namespace Cress.Model
                         command.ExecuteNonQuery();
                     }
                 }
+            }
+        }
+        public void LeaveChatRoom(long chatId, long userId)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"DELETE FROM conversation_participants WHERE chat_room_id=@chatId and user_id=@userId";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@chatId", chatId);
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+        }
+
+        public void UpdateChatRoom(long chatId, string chatName)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"UPDATE chat_room SET name=@chatName WHERE id=@chatId";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@chatId", chatId);
+                    command.Parameters.AddWithValue("@chatName", chatName);
+                    command.ExecuteNonQuery();
+                }
+
             }
         }
     }
