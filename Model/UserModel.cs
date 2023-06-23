@@ -16,5 +16,10 @@ namespace Cress.Model
         public Image ProfilePicture { get; set; }
         private List<ChatRoom> ChatRooms { get; set; }
 
+
+        public override string ToString()
+        {
+            return Username;
+        }
     }
 }
