@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace Cress.Model
 {
@@ -230,7 +231,7 @@ namespace Cress.Model
                     command.ExecuteNonQuery();
                 }
             }
-        } 
+        }
 
         public List<Message> GetNewMessages(long userId, long chatRoomId)
         {
@@ -286,6 +287,91 @@ namespace Cress.Model
             }
 
             return newMessages;
+        }
+
+        public List<User> GetAllUsers(long userId)
+        {
+            List<User> users = new List<User>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT * FROM users WHERE users.id != @id";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", userId);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Model.User user = new Model.User
+                            {
+                                Id = (int)reader["id"],
+                                Username = (string)reader["username"]
+                            };
+
+                            users.Add(user);
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }
+
+        public long CreateChatRoom(string chatName)
+        {
+            long id = 0;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT max(id) as id FROM chat_room";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            id = (int)reader["id"]+1;
+                        }
+                    }
+                }
+
+                query = @"INSERT INTO chat_room (id, name)
+                             VALUES (@id, @chatName)";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@chatName", chatName);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return id;
+        }
+
+        public void AddUsersToChatRoom(long chatId, List<User> users)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"INSERT INTO conversation_participants (chat_room_id, user_id) VALUES (@chatId, @userId)";
+
+                foreach (var user in users)
+                {
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@chatId", chatId);
+                        command.Parameters.AddWithValue("@userId", user.Id);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
         }
     }
 }
