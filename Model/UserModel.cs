@@ -21,5 +21,19 @@ namespace Cress.Model
         {
             return Username;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            // If the passed object is not Customer Type, return False
+            if (!(obj is User))
+            {
+                return false;
+            }
+            return (this.Id == ((User)obj).Id);
+        }
     }
 }
