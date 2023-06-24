@@ -15,7 +15,7 @@ namespace Cress.View
     {
         public event Action<string, List<Model.User>> CreateNewChatRoom;
         public event Action<int> LeaveChatRoom;
-        public event Action<int, string> UpdateChatRoom;
+        public event Action<int, string, List<Model.User>> UpdateChatRoom;
         public CreateChatRoomView()
         {
             InitializeComponent();
@@ -57,6 +57,18 @@ namespace Cress.View
                 LeaveChatRoomBtn.Visible = true;
                 EditChatRoomBtn.Visible = true;
                 newChatName.Text = ChatListBox.SelectedItem.ToString();
+
+                for (int i = 0; i < UserListBox.Items.Count; i++)
+                {
+                    if ((ChatListBox.Items[ChatListBox.SelectedIndex] as Model.ChatRoom).Participants.Contains(UserListBox.Items[i]))
+                    {
+                        UserListBox.SetItemCheckState(i, CheckState.Checked);
+                    }
+                    else
+                    {
+                        UserListBox.SetItemCheckState(i, CheckState.Unchecked);
+                    }
+                }
             }
         }
 
@@ -76,7 +88,7 @@ namespace Cress.View
             //get checked users
             var userList = GetCheckedUsers();
 
-            UpdateChatRoom?.Invoke(ChatListBox.SelectedIndex, newChatName.Text);
+            UpdateChatRoom?.Invoke(ChatListBox.SelectedIndex, newChatName.Text, userList);
             //clear form
             CreateChtRm_Btn.Visible = true;
             LeaveChatRoomBtn.Visible = false;
