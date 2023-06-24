@@ -374,6 +374,7 @@ namespace Cress.Model
                 }
             }
         }
+
         public void LeaveChatRoom(long chatId, long userId)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -392,6 +393,26 @@ namespace Cress.Model
             }
         }
 
+        public void RemoveUsersFromChatRoom(long chatId, List<Model.User> users)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"DELETE FROM conversation_participants WHERE chat_room_id=@chatId and user_id=@userId";
+                foreach (var user in users)
+                {
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@chatId", chatId);
+                        command.Parameters.AddWithValue("@userId", user.Id);
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
+        }
         public void UpdateChatRoom(long chatId, string chatName)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
