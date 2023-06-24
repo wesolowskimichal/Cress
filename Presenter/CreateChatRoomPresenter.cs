@@ -66,10 +66,35 @@ namespace Cress.Presenter
             _view.SetChatListBox(_chatRooms);
         }
 
-        private void UpdateChatRoom(int listId, string name)
+        private void UpdateChatRoom(int listId, string name, List<Model.User> userList)
         {
-            var chatRoomId = _chatRooms[listId].Id;
-            DBManager.Instance.UpdateChatRoom(chatRoomId, name);
+            userList.Add(_user);
+            var chatRoom = _chatRooms[listId];
+
+            List<User> remove = new List<User>();
+            List<User> add = new List<User>();
+            // podział na dwie listy remove, add
+
+            foreach (var user in userList)
+            {
+                if (!chatRoom.Participants.Contains(user))
+                {
+                    add.Add(user);
+                }
+            }
+
+            foreach (var user in chatRoom.Participants)
+            {
+                if (!userList.Contains(user))
+                {
+                    remove.Add(user);
+                }
+            }
+
+            DBManager.Instance.RemoveUsersFromChatRoom(chatRoom.Id, remove);
+            DBManager.Instance.AddUsersToChatRoom(chatRoom.Id, add);
+
+            DBManager.Instance.UpdateChatRoom(chatRoom.Id, name);
 
             _chatRooms = GetChatRooms();
             _view.SetChatListBox(_chatRooms);
