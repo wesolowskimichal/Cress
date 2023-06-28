@@ -16,16 +16,6 @@ namespace Cress.Model
             ERROR
         };
 
-        public enum PassScore
-        {
-            BLANK = 0,
-            V_WEAK = 1,
-            WEAK = 2,
-            MEDIUM = 3,
-            STRONG = 4,
-            V_STRONG = 5
-        };
-
         public RegStatus Authenticate(string username, string password)
         {
             if (username == null || password == null || username.Length == 0 || password.Length == 0)

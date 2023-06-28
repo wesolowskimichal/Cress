@@ -24,7 +24,7 @@ namespace Cress.Presenter
             view.ChangeUserPassword += ChangeUserPassword;
             //set username and email fields
             _view.username_label_Set(user.Username);
-            _view.email_label_Set(user.Email);
+            _view.email_label_Set(user.Username);
             _view.pictureBox_Set(user.ProfilePicture);
         }
 

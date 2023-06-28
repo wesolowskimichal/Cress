@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Cress.View.UserSettings
 {
-    public partial class UserSettings : UserControl
+    public partial class UserSettings : Form
     {
         public event Action DeleteUser;
         public event Action<string, string> ChangeUserPassword;
@@ -72,7 +72,6 @@ namespace Cress.View.UserSettings
         public void username_label_Set(string username)
         {
             username_label.Text = $"Hello {username}!";
-            username_lbl.Text = $"Username: {username}";
         }
 
         public void email_label_Set(string email)

@@ -15,6 +15,7 @@ namespace Cress.View.ChatRoom
         event Action<Model.ChatRoom, string> SendNewMessage;
         event Action<Model.ChatRoom> LoadChat;
         event Action ManageClick;
+        event Action UserSettings;
 
         void Invoke(Action action);
     }

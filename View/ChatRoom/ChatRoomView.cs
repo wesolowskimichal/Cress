@@ -21,6 +21,8 @@ namespace Cress.View.ChatRoom
         public event Action<Model.ChatRoom, string> SendNewMessage;
         public event Action<Model.ChatRoom> LoadChat;
         public event Action ManageClick;
+        public event Action UserSettings;
+
         public void Invoke(Action action)
         {
             try
@@ -62,6 +64,11 @@ namespace Cress.View.ChatRoom
         private void button_manage_Click(object sender, EventArgs e)
         {
             ManageClick?.Invoke();
+        }
+
+        private void button_settings_Click(object sender, EventArgs e)
+        {
+            UserSettings?.Invoke();
         }
     }
 }

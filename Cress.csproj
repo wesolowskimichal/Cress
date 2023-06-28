@@ -155,7 +155,7 @@
       <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\UserSettings\UserSettings.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\UserSettings\UserSettings.Designer.cs">
       <DependentUpon>UserSettings.cs</DependentUpon>
@@ -187,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\src\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserSettings\UserSettings.resx">
+      <DependentUpon>UserSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

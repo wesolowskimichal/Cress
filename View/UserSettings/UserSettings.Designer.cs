@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.email_label = new System.Windows.Forms.Label();
-            this.username_lbl = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.delUser_btn = new System.Windows.Forms.Button();
             this.chngPassword_btn = new System.Windows.Forms.Button();
@@ -43,21 +42,11 @@
             // 
             this.email_label.AutoSize = true;
             this.email_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.email_label.Location = new System.Drawing.Point(306, 150);
+            this.email_label.Location = new System.Drawing.Point(306, 126);
             this.email_label.Name = "email_label";
             this.email_label.Size = new System.Drawing.Size(71, 25);
             this.email_label.TabIndex = 15;
             this.email_label.Text = "Email: ";
-            // 
-            // username_lbl
-            // 
-            this.username_lbl.AutoSize = true;
-            this.username_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.username_lbl.Location = new System.Drawing.Point(306, 115);
-            this.username_lbl.Name = "username_lbl";
-            this.username_lbl.Size = new System.Drawing.Size(113, 25);
-            this.username_lbl.TabIndex = 14;
-            this.username_lbl.Text = "Username: ";
             // 
             // pictureBox
             // 
@@ -113,7 +102,7 @@
             // 
             // username_label
             // 
-            this.username_label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.username_label.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.username_label.AutoSize = true;
             this.username_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
@@ -127,8 +116,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.email_label);
-            this.Controls.Add(this.username_lbl);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.delUser_btn);
             this.Controls.Add(this.chngPassword_btn);
@@ -136,7 +125,6 @@
             this.Controls.Add(this.chngImg_btn);
             this.Controls.Add(this.username_label);
             this.Name = "UserSettings";
-            this.Size = new System.Drawing.Size(816, 489);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -146,7 +134,6 @@
         #endregion
 
         private System.Windows.Forms.Label email_label;
-        private System.Windows.Forms.Label username_lbl;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button delUser_btn;
         private System.Windows.Forms.Button chngPassword_btn;
