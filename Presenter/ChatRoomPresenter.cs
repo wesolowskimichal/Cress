@@ -11,10 +11,11 @@ namespace Cress.Presenter
 {
     public class ChatRoomPresenter
     {
+        private UserSettingsPresenter userSettingsPresenter;
         private View.UserSettings.UserSettings userSettings;
         private Action showManage;
         private Action logOut;
-        private readonly User _user;
+        public readonly User _user;
         private readonly IChatRoomView _view;
         private List<ChatRoom> _chatRooms;
         private bool _isRunning;
@@ -29,7 +30,6 @@ namespace Cress.Presenter
         public ChatRoomPresenter(IChatRoomView view, User user, Action showManage, Action logOut)
         {
             userSettings = new UserSettings();
-            var presenter = new Presenter.UserSettingsPresenter(userSettings, user);
             userSettings.Visible = false;
             this.showManage = showManage;
             this.logOut = logOut;
@@ -62,7 +62,7 @@ namespace Cress.Presenter
         private void User_Settings()
         {
             userSettings = new UserSettings();
-            var presenter = new Presenter.UserSettingsPresenter(userSettings, _user);
+            userSettingsPresenter = new Presenter.UserSettingsPresenter(userSettings, _user, logOut);
             userSettings.Visible = true;
         }
         private void Manage_Click()

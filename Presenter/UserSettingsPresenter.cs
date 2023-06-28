@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cress.Model;
+using Cress.View;
 using Cress.View.UserSettings;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Cress.Presenter
@@ -15,10 +17,14 @@ namespace Cress.Presenter
     {
         private readonly User _user;
         private readonly IUserSettings _view;
-        public UserSettingsPresenter(IUserSettings view, User user)
+        private ChangeEmailDialogPresenter changeEmailDialogPresenter;
+        private Action LogOut;
+
+        public UserSettingsPresenter(IUserSettings view, User user, Action logOut)
         {
             _user = user;
             _view = view;
+            LogOut = logOut;
             //map actions
             _view.DeleteUser += DeleteUser;
             _view.ChangeUserPicture += ChangeUserPicture;
@@ -34,13 +40,18 @@ namespace Cress.Presenter
 
         private void Change_Password_Dial(UserSettings userSettings)
         {
-            var dialog = new ChangePasswordDialog(userSettings);
-            dialog.Show();
+            /*var dialog = new ChangeEmailDialog(userSettings);
+            var presenter = new ChangeEmailDialogPresenter(dialog, _view);*/
         }
 
         private void Change_Email_Dial(UserSettings userSettings)
         {
-            var dialog = new ChangeEmailDialog(userSettings);
+            var dialog = new ChangeEmailDialog();
+
+            if (changeEmailDialogPresenter == null)
+            {
+                changeEmailDialogPresenter = new ChangeEmailDialogPresenter(dialog, _view, LogOut);
+            }
             dialog.Show();
         }
 
@@ -81,9 +92,7 @@ namespace Cress.Presenter
                 //TODO
                 //check if email already exists in db if no
                 //set as new email
-
-                //then
-                _view.EmailLabel.Text = new_email;
+                //logout
             }
             catch (Exception e)
             {

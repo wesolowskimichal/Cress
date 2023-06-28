@@ -15,7 +15,7 @@ namespace Cress.Presenter
     public class CreateChatRoomPresenter
     {
         private Action showManage;
-        private readonly User _user;
+        public readonly User _user;
         private List<ChatRoom> _chatRooms;
         private List<User> _users;
         private readonly CreateChatRoomView _view;

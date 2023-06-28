@@ -43,6 +43,12 @@ namespace Cress.View.ChatRoom
             InitializeComponent();
         }
 
+        public void Clear()
+        {
+            chatRoom_List.Items.Clear();
+            chat_Panel.Controls.Clear();
+        }
+
         private void chatRoom_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             int position = chatRoom_List.SelectedIndex;

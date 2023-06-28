@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cress.Presenter;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,11 @@ namespace Cress
     public partial class Main : Form
     {
         public Model.User user;
+        private Presenter.ChatRoomPresenter chatRoomPresenter;
+        private Presenter.CreateChatRoomPresenter createChatRoomPresenter;
+        private Presenter.LoginPresenter loginPresenter;
+        private Presenter.RegisterPresenter registerPresenter;
+
         public Main()
         {
             InitializeComponent();
@@ -22,15 +28,20 @@ namespace Cress
             createChatRoomView1.Visible = false;
             var view = loginViewController1;
             var model = new Model.LoginModel();
-            var presenter = new Presenter.LoginPresenter(view, model, this);
-            var reg_model = new Model.RegisterModel();
-            var reg_presenter = new Presenter.RegisterPresenter(registerView1, reg_model, this);
+            loginPresenter = new Presenter.LoginPresenter(view, model, this);
         }
 
         public void LoggedIn()
         {
-            var presenter = new Presenter.ChatRoomPresenter(chatRoomView1, user, ShowManage, LogOut);
-            var pr = new Presenter.CreateChatRoomPresenter(createChatRoomView1, user, ShowManage);
+            if (chatRoomPresenter == null)
+            {
+                chatRoomPresenter = new Presenter.ChatRoomPresenter(chatRoomView1, user, ShowManage, LogOut);
+            }
+
+            if (createChatRoomPresenter == null)
+            {
+                createChatRoomPresenter = new Presenter.CreateChatRoomPresenter(createChatRoomView1, user, ShowManage);
+            }
             chatRoomView1.Visible = true;
             registerView1.Visible = false;
             loginViewController1.Visible = false;
@@ -39,14 +50,22 @@ namespace Cress
         public void LogOut()
         {
             user = null;
+            chatRoomPresenter = null;
+            createChatRoomPresenter = null;
             loginViewController1.Visible = true;
             chatRoomView1.Visible = false;
             registerView1.Visible = false;
             createChatRoomView1.Visible = false;
+
+            chatRoomView1.Clear();
         }
 
         public void Registration()
         {
+            if(registerPresenter == null)
+            {
+                registerPresenter = new Presenter.RegisterPresenter(registerView1, new Model.RegisterModel(), this);
+            }
             registerView1.Visible = true;
         }
 

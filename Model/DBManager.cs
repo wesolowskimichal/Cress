@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Collections;
+using Cress.View.UserSettings;
+using System.Windows.Forms;
 
 namespace Cress.Model
 {
@@ -479,6 +481,23 @@ namespace Cress.Model
             }
 
             return users;
+        }
+
+        public void UpdateEmail(string existing_usernname, string new_username)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"UPDATE users SET username = @new_username WHERE username = @existing_username;";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@new_username", new_username);
+                    command.Parameters.AddWithValue("@existing_username", existing_usernname.Substring(7));
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

@@ -12,23 +12,23 @@ using System.Windows.Forms;
 
 namespace Cress.View.UserSettings
 {
-    public partial class ChangeEmailDialog : Form
+    public partial class ChangeEmailDialog : Form, IChangeEmailDialog
     {
-        private readonly UserSettings _form;
-        public ChangeEmailDialog(UserSettings form)
+        #region implementation of IChangeEmailDialog
+        public System.Windows.Forms.Label ErrorLabel => error_msg;
+        public String Email => new_email_in.Text;
+
+        public event Action ChangeEmail;
+        #endregion
+
+        public ChangeEmailDialog()
         {
             InitializeComponent();
-            error_msg.Text = "";
-            _form = form;
         }
 
         private void chng_email_btn_Click(object sender, EventArgs e)
         {
-            //TODO
-            //regex do walidacji emaila
-            // if regex zly -> error_msg.Text = "error bo costam";
-            _form.set_new_email(new_email_in.Text);
-            this.Close();
+            ChangeEmail?.Invoke();
         }
     }
 }

@@ -10,8 +10,11 @@ using System.Windows.Forms;
 
 namespace Cress.View.UserSettings
 {
-    public partial class ChangePasswordDialog : Form
+    public partial class ChangePasswordDialog : Form, IChangePasswordDialog
     {
+        #region implementation of IChangeDialog
+        public System.Windows.Forms.Label ErrorLabel => error_label;
+        #endregion
         private readonly UserSettings _form;
         public ChangePasswordDialog(UserSettings form)
         {

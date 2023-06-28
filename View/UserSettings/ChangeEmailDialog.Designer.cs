@@ -32,6 +32,7 @@
             this.chng_email_btn = new System.Windows.Forms.Button();
             this.error_msg = new System.Windows.Forms.Label();
             this.new_emai = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // new_email_in
@@ -56,9 +57,8 @@
             this.error_msg.AutoSize = true;
             this.error_msg.Location = new System.Drawing.Point(168, 83);
             this.error_msg.Name = "error_msg";
-            this.error_msg.Size = new System.Drawing.Size(35, 13);
+            this.error_msg.Size = new System.Drawing.Size(0, 13);
             this.error_msg.TabIndex = 2;
-            this.error_msg.Text = "label1";
             // 
             // new_emai
             // 
@@ -69,11 +69,21 @@
             this.new_emai.TabIndex = 3;
             this.new_emai.Text = "New email:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(39, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(333, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Warning: After Changing Email You Will Be Automatically Logged Out";
+            // 
             // ChangeEmailDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 161);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.new_emai);
             this.Controls.Add(this.error_msg);
             this.Controls.Add(this.chng_email_btn);
@@ -91,5 +101,6 @@
         private System.Windows.Forms.Button chng_email_btn;
         private System.Windows.Forms.Label error_msg;
         private System.Windows.Forms.Label new_emai;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenter\ChangeEmailDialogPresenter.cs" />
     <Compile Include="Model\ChatRoomModel.cs" />
     <Compile Include="Model\ContactModel.cs" />
     <Compile Include="Model\DBManager.cs" />
@@ -154,6 +155,8 @@
     <Compile Include="View\UserSettings\ChangePasswordDialog.Designer.cs">
       <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UserSettings\IChangeEmailDialog.cs" />
+    <Compile Include="View\UserSettings\IChangePasswordDialog.cs" />
     <Compile Include="View\UserSettings\IUserSettings.cs" />
     <Compile Include="View\UserSettings\UserSettings.cs">
       <SubType>Form</SubType>
@@ -188,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\src\UserControl1.resx">
       <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserSettings\ChangeEmailDialog.resx">
+      <DependentUpon>ChangeEmailDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserSettings\UserSettings.resx">
       <DependentUpon>UserSettings.cs</DependentUpon>
