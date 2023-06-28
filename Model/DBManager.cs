@@ -371,5 +371,114 @@ namespace Cress.Model
             long chatRoomId = DBManager.Instance.CreateChatRoom($"{username}'s Conversation");
             AddUserToChatRoom(userId, chatRoomId);
         }
+
+        public void AddUsersToChatRoom(long chatId, List<User> users)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"INSERT INTO conversation_participants (chat_room_id, user_id) VALUES (@chatId, @userId)";
+
+                foreach (var user in users)
+                {
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@chatId", chatId);
+                        command.Parameters.AddWithValue("@userId", user.Id);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        public void LeaveChatRoom(long chatId, long userId)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"DELETE FROM conversation_participants WHERE chat_room_id=@chatId and user_id=@userId";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@chatId", chatId);
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+        }
+
+        public void RemoveUsersFromChatRoom(long chatId, List<Model.User> users)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"DELETE FROM conversation_participants WHERE chat_room_id=@chatId and user_id=@userId";
+                foreach (var user in users)
+                {
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@chatId", chatId);
+                        command.Parameters.AddWithValue("@userId", user.Id);
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
+        }
+        public void UpdateChatRoom(long chatId, string chatName)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"UPDATE chat_room SET name=@chatName WHERE id=@chatId";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@chatId", chatId);
+                    command.Parameters.AddWithValue("@chatName", chatName);
+                    command.ExecuteNonQuery();
+                }
+
+            }
+        }
+
+        public List<User> GetAllUsers(long userId)
+        {
+            List<User> users = new List<User>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT * FROM users WHERE users.id != @id";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", userId);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Model.User user = new Model.User
+                            {
+                                Id = (int)reader["id"],
+                                Username = (string)reader["username"]
+                            };
+
+                            users.Add(user);
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }
     }
 }
