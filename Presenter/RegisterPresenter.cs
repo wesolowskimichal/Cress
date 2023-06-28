@@ -24,7 +24,14 @@ namespace Cress.Presenter
             view.RegisterButtonClick += view_Register;
             view.ShowPassword += show_Password;
             view.CheckPassScore += check_PassScore;
+            view.LogOut += Log_Out;
         }
+
+        private void Log_Out()
+        {
+            main.LogOut();
+        }
+
         private void view_Register()
         {
             string email = view.Email;

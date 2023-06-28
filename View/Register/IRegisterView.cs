@@ -17,5 +17,6 @@ namespace Cress.View.Register
         event Action RegisterButtonClick;
         event Action ShowPassword;
         event Action CheckPassScore;
+        event Action LogOut;
     }
 }

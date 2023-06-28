@@ -36,6 +36,7 @@
             this.label_password = new System.Windows.Forms.Label();
             this.label_email = new System.Windows.Forms.Label();
             this.passScore_bar = new System.Windows.Forms.ProgressBar();
+            this.button_login = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_logError
@@ -131,11 +132,24 @@
             this.passScore_bar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.passScore_bar.TabIndex = 22;
             // 
+            // button_login
+            // 
+            this.button_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(98)))), ((int)(((byte)(132)))), ((int)(((byte)(157)))));
+            this.button_login.Font = new System.Drawing.Font("Century", 15.75F, System.Drawing.FontStyle.Bold);
+            this.button_login.Location = new System.Drawing.Point(661, 667);
+            this.button_login.Name = "button_login";
+            this.button_login.Size = new System.Drawing.Size(123, 33);
+            this.button_login.TabIndex = 23;
+            this.button_login.Text = "Login";
+            this.button_login.UseVisualStyleBackColor = false;
+            this.button_login.Click += new System.EventHandler(this.button_login_Click);
+            // 
             // RegisterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Cress.Properties.Resources.background_login;
+            this.Controls.Add(this.button_login);
             this.Controls.Add(this.passScore_bar);
             this.Controls.Add(this.label_logError);
             this.Controls.Add(this.button_showPass);
@@ -161,5 +175,6 @@
         private System.Windows.Forms.Label label_password;
         private System.Windows.Forms.Label label_email;
         private System.Windows.Forms.ProgressBar passScore_bar;
+        private System.Windows.Forms.Button button_login;
     }
 }

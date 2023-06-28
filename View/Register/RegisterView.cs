@@ -25,6 +25,7 @@ namespace Cress.View.Register
         public event Action RegisterButtonClick;
         public event Action ShowPassword;
         public event Action CheckPassScore;
+        public event Action LogOut;
         #endregion
         public RegisterView()
         {
@@ -44,6 +45,11 @@ namespace Cress.View.Register
         private void textBox_password_KeyUp(object sender, KeyEventArgs e)
         {
             CheckPassScore?.Invoke();
+        }
+
+        private void button_login_Click(object sender, EventArgs e)
+        {
+            LogOut?.Invoke();
         }
     }
 }

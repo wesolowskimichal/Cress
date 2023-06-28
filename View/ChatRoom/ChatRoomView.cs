@@ -22,6 +22,8 @@ namespace Cress.View.ChatRoom
         public event Action<Model.ChatRoom> LoadChat;
         public event Action ManageClick;
         public event Action UserSettings;
+        public event Action LogOut;
+
 
         public void Invoke(Action action)
         {
@@ -69,6 +71,11 @@ namespace Cress.View.ChatRoom
         private void button_settings_Click(object sender, EventArgs e)
         {
             UserSettings?.Invoke();
+        }
+
+        private void button_logout_Click(object sender, EventArgs e)
+        {
+            LogOut?.Invoke();
         }
     }
 }

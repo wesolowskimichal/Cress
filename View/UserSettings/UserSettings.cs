@@ -11,13 +11,21 @@ using System.Windows.Forms;
 
 namespace Cress.View.UserSettings
 {
-    public partial class UserSettings : Form
+    public partial class UserSettings : Form, IUserSettings
     {
+        #region implementation of IUserSettings
+        public System.Windows.Forms.PictureBox PictureBox => pictureBox; 
+        public System.Windows.Forms.Label EmailLabel => email_label;
+        public System.Windows.Forms.Label UsernameLabel => username_label;
+
+        public event Action<UserSettings> ChangePasswordDial;
+        public event Action<UserSettings> ChangeEmailDial;
+
         public event Action DeleteUser;
         public event Action<string, string> ChangeUserPassword;
         public event Action<string> ChangeUserEmail;
         public event Action<string> ChangeUserPicture;
-
+        #endregion
         public UserSettings()
         {
             InitializeComponent();
@@ -49,39 +57,16 @@ namespace Cress.View.UserSettings
         {
             //TODO
             // dialog/messagebox co jest tam miejsce na nowego emaila
-            var dialog = new ChangeEmailDialog(this);
-            dialog.Show();
+            ChangeEmailDial?.Invoke(this);
+            
         }
 
         private void chngPassword_btn_Click(object sender, EventArgs e)
         {
             //TODO
             // dialog co jest tam miejsce na nowe i stare hasło
-            var dialog = new ChangePasswordDialog(this);
-            dialog.Show();
-        }
-
-        // publiczne metody do ustwiania pól przez prezenter
-        public void pictureBox_Set(Image picture)
-        {
-            //TODO
-            //resize picture to 500px by height
-            pictureBox.Image = picture;
-        }
-
-        public void username_label_Set(string username)
-        {
-            username_label.Text = $"Hello {username}!";
-        }
-
-        public void email_label_Set(string email)
-        {
-            email_label.Text = $"Email: {email}";
-        }
-
-        public void create_MessageBox(string message, string caption)
-        {
-            MessageBox.Show(message, caption);
+            ChangePasswordDial?.Invoke(this);
+            
         }
 
         //te dwa gówna służą do przekazania wartości z ChangeEmailDialog i ChangePasswordDialog

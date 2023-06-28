@@ -4,28 +4,44 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Cress.Model;
 using Cress.View.UserSettings;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Cress.Presenter
 {
     public class UserSettingsPresenter
     {
         private readonly User _user;
-        private readonly UserSettings _view;
-        public UserSettingsPresenter(UserSettings view, User user)
+        private readonly IUserSettings _view;
+        public UserSettingsPresenter(IUserSettings view, User user)
         {
             _user = user;
             _view = view;
             //map actions
-            view.DeleteUser += DeleteUser;
-            view.ChangeUserPicture += ChangeUserPicture;
-            view.ChangeUserEmail += ChangeUserEmail;
-            view.ChangeUserPassword += ChangeUserPassword;
+            _view.DeleteUser += DeleteUser;
+            _view.ChangeUserPicture += ChangeUserPicture;
+            _view.ChangeUserEmail += ChangeUserEmail;
+            _view.ChangeUserPassword += ChangeUserPassword;
+            _view.ChangePasswordDial += Change_Password_Dial;
+            _view.ChangeEmailDial += Change_Email_Dial;
             //set username and email fields
-            _view.username_label_Set(user.Username);
-            _view.email_label_Set(user.Username);
-            _view.pictureBox_Set(user.ProfilePicture);
+            _view.UsernameLabel.Text = "Hello " + user.Username + "!";
+            _view.EmailLabel.Text = "Email: " + user.Username;
+            _view.PictureBox.Image = user.ProfilePicture;
+        }
+
+        private void Change_Password_Dial(UserSettings userSettings)
+        {
+            var dialog = new ChangePasswordDialog(userSettings);
+            dialog.Show();
+        }
+
+        private void Change_Email_Dial(UserSettings userSettings)
+        {
+            var dialog = new ChangeEmailDialog(userSettings);
+            dialog.Show();
         }
 
         private void DeleteUser()
@@ -37,7 +53,7 @@ namespace Cress.Presenter
             }
             catch (Exception e)
             {
-                _view.create_MessageBox(e.Message, "Error while deleating account");
+                Environment.Exit(404);
             }
         }
 
@@ -50,11 +66,11 @@ namespace Cress.Presenter
                 //set as new profile picture
 
                 //then
-                _view.pictureBox_Set(new_picture);
+                _view.PictureBox.Image = new_picture;
             }
             catch (Exception e)
             {
-                _view.create_MessageBox(e.Message, "Error while changing profile picture");
+                Environment.Exit(404);
             }
         }
 
@@ -67,11 +83,11 @@ namespace Cress.Presenter
                 //set as new email
 
                 //then
-                _view.email_label_Set(new_email);
+                _view.EmailLabel.Text = new_email;
             }
             catch (Exception e)
             {
-                _view.create_MessageBox(e.Message, "Error while changing email picture");
+                Environment.Exit(404);
             }
         }
         private void ChangeUserPassword(string old_password, string new_password)
@@ -83,11 +99,11 @@ namespace Cress.Presenter
                 //set as new password
 
                 //then
-                _view.create_MessageBox("New password", "Password changed");
+                MessageBox.Show("password", "Password Changed");
             }
             catch (Exception e)
             {
-                _view.create_MessageBox(e.Message, "Error while changing email picture");
+                Environment.Exit(404);
             }
         }
 

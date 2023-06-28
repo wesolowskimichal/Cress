@@ -154,6 +154,7 @@
     <Compile Include="View\UserSettings\ChangePasswordDialog.Designer.cs">
       <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UserSettings\IUserSettings.cs" />
     <Compile Include="View\UserSettings\UserSettings.cs">
       <SubType>Form</SubType>
     </Compile>
