@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cress.View
+namespace Cress.View.Register
 {
-    public interface ILoginView
+    public interface IRegisterView
     {
         string Email { get; }
         string Password { get; }
         System.Windows.Forms.TextBox PasswordTextBox { get; }
-        System.Windows.Forms.Label LoginErrorLabel { get; }
+        System.Windows.Forms.Label RegisterErrorLabel { get; }
+        System.Windows.Forms.ProgressBar PassScore { get; }
 
-        event Action LoginButtonClick;
+        event Action RegisterButtonClick;
         event Action ShowPassword;
-        event Action Register;
+        event Action CheckPassScore;
     }
 }

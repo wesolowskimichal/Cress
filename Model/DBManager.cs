@@ -287,5 +287,89 @@ namespace Cress.Model
 
             return newMessages;
         }
+        public long CreateUser(string username, string password)
+        {
+            long userId = 0;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "INSERT INTO users (username, password) VALUES (@username, @password); SELECT LAST_INSERT_ID();";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    userId = Convert.ToInt64(command.ExecuteScalar());
+                }
+            }
+
+            return userId;
+        }
+
+        public long get_last_chatroom_id()
+        {
+            long id = 0;
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT MAX(chat_room.id) FROM chat_room;";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+
+                    id = Convert.ToInt64(command.ExecuteScalar());
+                }
+            }
+            return id;
+        }
+
+        public long CreateChatRoom(string chatRoom_Name)
+        {
+            long chatRoomId = get_last_chatroom_id() + 1;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "INSERT INTO chat_room (id, name) VALUES (@last_id, @name);";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@name", chatRoom_Name);
+                    command.Parameters.AddWithValue("@last_id", chatRoomId);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            return chatRoomId;
+        }
+
+        private void AddUserToChatRoom(long userId, long chatRoomId)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"INSERT INTO conversation_participants (chat_room_id, user_id) VALUES (@chatRoomId, @userId);";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@chatRoomId", chatRoomId);
+                    command.Parameters.AddWithValue("@userId", userId);
+                    Console.WriteLine($"RES: {userId}, {chatRoomId}");
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void AddUser(string username, string password)
+        {
+            long userId = DBManager.Instance.CreateUser(username, password);
+            long chatRoomId = DBManager.Instance.CreateChatRoom($"{username}'s Conversation");
+            AddUserToChatRoom(userId, chatRoomId);
+        }
     }
 }

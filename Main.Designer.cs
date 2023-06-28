@@ -29,17 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.loginViewController1 = new Cress.View.LoginViewController();
             this.chatRoomView1 = new Cress.View.ChatRoom.ChatRoomView();
+            this.loginViewController1 = new Cress.View.LoginViewController();
+            this.registerView1 = new Cress.View.Register.RegisterView();
             this.SuspendLayout();
-            // 
-            // loginViewController1
-            // 
-            this.loginViewController1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("loginViewController1.BackgroundImage")));
-            this.loginViewController1.Location = new System.Drawing.Point(0, 0);
-            this.loginViewController1.Name = "loginViewController1";
-            this.loginViewController1.Size = new System.Drawing.Size(1366, 768);
-            this.loginViewController1.TabIndex = 0;
             // 
             // chatRoomView1
             // 
@@ -51,11 +44,30 @@
             this.chatRoomView1.Size = new System.Drawing.Size(700, 465);
             this.chatRoomView1.TabIndex = 1;
             // 
+            // loginViewController1
+            // 
+            this.loginViewController1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("loginViewController1.BackgroundImage")));
+            this.loginViewController1.Location = new System.Drawing.Point(0, 0);
+            this.loginViewController1.Name = "loginViewController1";
+            this.loginViewController1.Size = new System.Drawing.Size(1366, 768);
+            this.loginViewController1.TabIndex = 0;
+            // 
+            // registerView1
+            // 
+            this.registerView1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("registerView1.BackgroundImage")));
+            this.registerView1.Location = new System.Drawing.Point(0, 0);
+            this.registerView1.Name = "registerView1";
+            this.registerView1.Size = new System.Drawing.Size(1366, 768);
+            this.registerView1.TabIndex = 2;
+            this.registerView1.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Cress.Properties.Resources.background_login;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.registerView1);
             this.Controls.Add(this.chatRoomView1);
             this.Controls.Add(this.loginViewController1);
             this.Name = "Main";
@@ -69,6 +81,7 @@
 
         private View.LoginViewController loginViewController1;
         private View.ChatRoom.ChatRoomView chatRoomView1;
+        private View.Register.RegisterView registerView1;
     }
 }
 

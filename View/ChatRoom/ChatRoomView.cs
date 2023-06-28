@@ -22,7 +22,14 @@ namespace Cress.View.ChatRoom
         public event Action<Model.ChatRoom> LoadChat;
         public void Invoke(Action action)
         {
-            this.BeginInvoke(action);
+            try
+            {
+                this.BeginInvoke(action);
+            }
+            catch
+            {
+                Environment.Exit(0);
+            }
         }
         #endregion
 

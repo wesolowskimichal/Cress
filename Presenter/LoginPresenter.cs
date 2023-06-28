@@ -23,6 +23,7 @@ namespace Cress.Presenter
             this.main = main;
             view.LoginButtonClick += view_Login;
             view.ShowPassword += show_Password;
+            view.Register += view_Register;
         }
         private void view_Login()
         {
@@ -40,6 +41,11 @@ namespace Cress.Presenter
             {
                 view.LoginErrorLabel.Text = "Wrong email or password!";
             }
+        }
+
+        private void view_Register()
+        {
+            main.Registration();
         }
 
         private void show_Password()

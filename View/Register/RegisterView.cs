@@ -8,23 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Cress.View
+namespace Cress.View.Register
 {
-    public partial class LoginViewController : UserControl, ILoginView
+    public partial class RegisterView : UserControl, IRegisterView
     {
-        #region implementation of ILoginView
+
+        #region implementation of IRegisterView
 
         public string Email => textBox_email.Text;
         public string Password => textBox_password.Text;
 
         public System.Windows.Forms.TextBox PasswordTextBox => textBox_password;
-        public System.Windows.Forms.Label LoginErrorLabel => label_logError;
+        public System.Windows.Forms.Label RegisterErrorLabel => label_logError;
+        public System.Windows.Forms.ProgressBar PassScore => passScore_bar;
 
-        public event Action LoginButtonClick;
+        public event Action RegisterButtonClick;
         public event Action ShowPassword;
-        public event Action Register;
+        public event Action CheckPassScore;
         #endregion
-        public LoginViewController()
+        public RegisterView()
         {
             InitializeComponent();
         }
@@ -32,17 +34,16 @@ namespace Cress.View
         private void button_showPass_Click(object sender, EventArgs e)
         {
             ShowPassword?.Invoke();
-
         }
 
-        private void button_login_Click(object sender, EventArgs e)
+        private void button_register_Click(object sender, EventArgs e)
         {
-            LoginButtonClick?.Invoke();
+            RegisterButtonClick?.Invoke();
         }
 
-        private void register_button_Click(object sender, EventArgs e)
+        private void textBox_password_KeyUp(object sender, KeyEventArgs e)
         {
-            Register?.Invoke();
+            CheckPassScore?.Invoke();
         }
     }
 }

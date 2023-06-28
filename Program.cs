@@ -14,7 +14,7 @@ namespace Cress
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+            //Application.EnableVisualStyles();     jesli jest jakas wyjeba to odkomentowac to
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
         }
