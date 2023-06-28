@@ -11,6 +11,7 @@ namespace Cress.Presenter
 {
     public class ChatRoomPresenter
     {
+        private Action showManage;
         private readonly User _user;
         private readonly IChatRoomView _view;
         private List<ChatRoom> _chatRooms;
@@ -23,12 +24,14 @@ namespace Cress.Presenter
             return _chatRooms;
         }
 
-        public ChatRoomPresenter(IChatRoomView view, User user)
+        public ChatRoomPresenter(IChatRoomView view, User user, Action showManage)
         {
+            this.showManage = showManage;
             _user = user;
             _view = view;
             _view.LoadChat += LoadChat;
             _view.SendNewMessage += SendNewMessage;
+            _view.ManageClick += Manage_Click;
 
             _chatRooms = GetChatRooms();
 
@@ -41,6 +44,12 @@ namespace Cress.Presenter
             _isRunning = true;
             _thread = new Thread(CheckForNewMessages);
             _thread.Start();
+        }
+
+        private void Manage_Click()
+        {
+            _chatRooms = GetChatRooms();
+            showManage();
         }
 
         private void LoadChat(ChatRoom chatRoom)
@@ -108,70 +117,17 @@ namespace Cress.Presenter
 
         private void CheckForNewMessages()
         {
-            /*while (_isRunning)
-            {
-                foreach (Model.ChatRoom chatRoom in _chatRooms)
-                {
-                    List<Model.Message> newMessages = DBManager.Instance.GetNewMessages(_user.Id, chatRoom.Id);
-
-                    // Add the new messages to the chat room's message collection
-                    chatRoom.Messages.AddRange(newMessages);
-                }
-
-                ChatRoom selectedChatRoom = null;
-                _view.Invoke(new Action(() =>
-                {
-                    selectedChatRoom = _view.ChatRoom_List.SelectedItem as ChatRoom;
-                }));
-
-                if (selectedChatRoom != null && _chatRooms.Contains(selectedChatRoom))
-                {
-                    // Retrieve new messages from the database
-                    List<Model.Message> newMessages = DBManager.Instance.GetNewMessages(_user.Id, selectedChatRoom.Id);
-
-                    // Update the chat room's messages with the new messages
-                    selectedChatRoom.Messages.AddRange(newMessages);
-
-                    // Reload the chat for the selected chat room
-                    _view.Invoke(new Action(() => LoadChat(selectedChatRoom)));
-                }
-                // Sleep for a specified duration before checking for new messages again
-                // Adjust the sleep duration according to your application requirements
-                Thread.Sleep(5000); // Sleep for 5 seconds
-
-            }
-*/
             while (_isRunning)
             {
-                // WOKRING BUT CHUJOWIZNA A LITTLE BIT
-                /* foreach (ChatRoom chatRoom in _chatRooms)
-                 {
-                     List<Model.Message> newMessages = DBManager.Instance.GetNewMessages(_user.Id, chatRoom.Id);
-
-                     // Add the new messages to the chat room's message collection
-                     chatRoom.Messages.AddRange(newMessages);
-                 }
-
-                 // Update the UI on the UI thread
-                 _view.Invoke(new Action(() =>
-                 {
-                     // Check if the selected chat room has changed before reloading the chat 
-                     LoadChat(_view.ChatRoom_List.SelectedItem as ChatRoom);
-                 }));
-
-                 // Sleep for a specified duration before checking for new messages again
-                 // Adjust the sleep duration according to your application requirements
-                 Thread.Sleep(500); // Sleep for 5 seconds*/
-                
-                    _view.Invoke(new Action(() =>
+                _view.Invoke(new Action(() =>
+                {
+                    if (_view.ChatRoom_List.SelectedIndex != -1)
                     {
-                        if (_view.ChatRoom_List.SelectedIndex != -1)
-                        {
-                            ChatRoom chatRoom = _view.ChatRoom_List.SelectedItem as ChatRoom;
-                            List<Model.Message> newMessages = DBManager.Instance.GetNewMessages(_user.Id, chatRoom.Id);
-                            LoadNewMessages(chatRoom, newMessages);
-                        }
-                    }));
+                        ChatRoom chatRoom = _view.ChatRoom_List.SelectedItem as ChatRoom;
+                        List<Model.Message> newMessages = DBManager.Instance.GetNewMessages(_user.Id, chatRoom.Id);
+                        LoadNewMessages(chatRoom, newMessages);
+                    }
+                }));
                 Thread.Sleep(500);
             }
         }

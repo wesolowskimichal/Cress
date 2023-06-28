@@ -32,6 +32,7 @@
             this.send_Btn = new System.Windows.Forms.Button();
             this.chat_Panel = new System.Windows.Forms.FlowLayoutPanel();
             this.chatRoom_List = new System.Windows.Forms.ListBox();
+            this.button_manage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // new_message_In
@@ -82,6 +83,16 @@
             this.chatRoom_List.TabIndex = 5;
             this.chatRoom_List.SelectedIndexChanged += new System.EventHandler(this.chatRoom_List_SelectedIndexChanged);
             // 
+            // button_manage
+            // 
+            this.button_manage.Location = new System.Drawing.Point(247, 11);
+            this.button_manage.Name = "button_manage";
+            this.button_manage.Size = new System.Drawing.Size(450, 23);
+            this.button_manage.TabIndex = 6;
+            this.button_manage.Text = "Manage";
+            this.button_manage.UseVisualStyleBackColor = true;
+            this.button_manage.Click += new System.EventHandler(this.button_manage_Click);
+            // 
             // ChatRoomView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -89,6 +100,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.button_manage);
             this.Controls.Add(this.chatRoom_List);
             this.Controls.Add(this.chat_Panel);
             this.Controls.Add(this.send_Btn);
@@ -106,5 +118,6 @@
         private System.Windows.Forms.FlowLayoutPanel chat_Panel;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ListBox chatRoom_List;
+        private System.Windows.Forms.Button button_manage;
     }
 }

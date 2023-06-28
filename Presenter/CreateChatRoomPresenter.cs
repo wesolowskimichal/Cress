@@ -8,11 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Cress.Presenter
 {
     public class CreateChatRoomPresenter
     {
+        private Action showManage;
         private readonly User _user;
         private List<ChatRoom> _chatRooms;
         private List<User> _users;
@@ -30,8 +32,9 @@ namespace Cress.Presenter
             return _users;
         }
 
-        public CreateChatRoomPresenter(CreateChatRoomView view, User user)
+        public CreateChatRoomPresenter(CreateChatRoomView view, User user, Action showManage)
         {
+            this.showManage = showManage;
             _user = user;
             _view = view;
             _chatRooms = GetChatRooms();
@@ -40,9 +43,16 @@ namespace Cress.Presenter
             _view.CreateNewChatRoom += CreateNewChatRoom;
             _view.LeaveChatRoom += LeaveChatRoom;
             _view.UpdateChatRoom += UpdateChatRoom;
+            _view.ManageClick += ShowManage;
             //load chats
             _view.SetChatListBox(_chatRooms);
             _view.SetUserListBox(_users);
+        }
+
+        private void ShowManage()
+        {
+            _chatRooms = GetChatRooms();
+            showManage();
         }
 
         private void CreateNewChatRoom(string chatName, List<User> chatUsers)

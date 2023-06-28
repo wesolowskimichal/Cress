@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.LeaveChatRoomBtn = new System.Windows.Forms.Button();
             this.EditChatRoomBtn = new System.Windows.Forms.Button();
+            this.button_return = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UserListBox
@@ -103,7 +104,7 @@
             // 
             // LeaveChatRoomBtn
             // 
-            this.LeaveChatRoomBtn.Location = new System.Drawing.Point(501, 356);
+            this.LeaveChatRoomBtn.Location = new System.Drawing.Point(501, 385);
             this.LeaveChatRoomBtn.Name = "LeaveChatRoomBtn";
             this.LeaveChatRoomBtn.Size = new System.Drawing.Size(117, 23);
             this.LeaveChatRoomBtn.TabIndex = 7;
@@ -113,7 +114,7 @@
             // 
             // EditChatRoomBtn
             // 
-            this.EditChatRoomBtn.Location = new System.Drawing.Point(391, 356);
+            this.EditChatRoomBtn.Location = new System.Drawing.Point(389, 385);
             this.EditChatRoomBtn.Name = "EditChatRoomBtn";
             this.EditChatRoomBtn.Size = new System.Drawing.Size(106, 23);
             this.EditChatRoomBtn.TabIndex = 8;
@@ -121,10 +122,21 @@
             this.EditChatRoomBtn.UseVisualStyleBackColor = true;
             this.EditChatRoomBtn.Click += new System.EventHandler(this.EditChatRoomBtn_Click);
             // 
+            // button_return
+            // 
+            this.button_return.Location = new System.Drawing.Point(391, 415);
+            this.button_return.Name = "button_return";
+            this.button_return.Size = new System.Drawing.Size(227, 23);
+            this.button_return.TabIndex = 9;
+            this.button_return.Text = "Return";
+            this.button_return.UseVisualStyleBackColor = true;
+            this.button_return.Click += new System.EventHandler(this.button_return_Click);
+            // 
             // CreateChatRoomView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button_return);
             this.Controls.Add(this.EditChatRoomBtn);
             this.Controls.Add(this.LeaveChatRoomBtn);
             this.Controls.Add(this.label3);
@@ -152,5 +164,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button LeaveChatRoomBtn;
         private System.Windows.Forms.Button EditChatRoomBtn;
+        private System.Windows.Forms.Button button_return;
     }
 }

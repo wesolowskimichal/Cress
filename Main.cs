@@ -18,6 +18,7 @@ namespace Cress
             InitializeComponent();
             chatRoomView1.Visible = false;
             registerView1.Visible = false;
+            createChatRoomView1.Visible = false;
             var view = loginViewController1;
             var model = new Model.LoginModel();
             var presenter = new Presenter.LoginPresenter(view, model, this);
@@ -25,7 +26,8 @@ namespace Cress
 
         public void LoggedIn()
         {
-            var presenter = new Presenter.ChatRoomPresenter(chatRoomView1, user);
+            var presenter = new Presenter.ChatRoomPresenter(chatRoomView1, user, ShowManage);
+            var pr = new Presenter.CreateChatRoomPresenter(createChatRoomView1, user, ShowManage);
             chatRoomView1.Visible = true;
             registerView1.Visible = false;
             loginViewController1.Visible = false;
@@ -36,6 +38,20 @@ namespace Cress
             var model = new Model.RegisterModel();
             var presenter = new Presenter.RegisterPresenter(registerView1, model, this);
             registerView1.Visible = true;
+        }
+
+        public void ShowManage()
+        {
+            if (chatRoomView1.Visible)
+            {
+                chatRoomView1.Visible = false;
+                createChatRoomView1.Visible = true;
+            }
+            else
+            {
+                chatRoomView1.Visible = true;
+                createChatRoomView1.Visible = false;
+            }
         }
     }
 }

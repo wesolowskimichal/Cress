@@ -16,6 +16,7 @@ namespace Cress.View
         public event Action<string, List<Model.User>> CreateNewChatRoom;
         public event Action<int> LeaveChatRoom;
         public event Action<int, string, List<Model.User>> UpdateChatRoom;
+        public event Action ManageClick;
         public CreateChatRoomView()
         {
             InitializeComponent();
@@ -114,6 +115,11 @@ namespace Cress.View
             {
                 ChatListBox.Items.Add(chatRoom);
             }
+        }
+
+        private void button_return_Click(object sender, EventArgs e)
+        {
+            ManageClick?.Invoke();
         }
     }
 }
