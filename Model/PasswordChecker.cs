@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cress.Model
 {
-    public class RegisterModel
+    public class PasswordChecker
     {
         public enum RegStatus
         {
@@ -16,7 +16,7 @@ namespace Cress.Model
             ERROR
         };
 
-        public RegStatus Authenticate(string username, string password)
+        public static RegStatus Authenticate(string username, string password)
         {
             if (username == null || password == null || username.Length == 0 || password.Length == 0)
                 return RegStatus.ERROR;
@@ -26,7 +26,7 @@ namespace Cress.Model
             return RegStatus.SUCCESS;
         }
 
-        internal static int CheckStrength(string password)
+        public static int CheckStrength(string password)
         {
             int score = 1;
 

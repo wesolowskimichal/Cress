@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Cress.Model.RegisterModel;
+using static Cress.Model.PasswordChecker;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Cress.Model
@@ -31,6 +31,7 @@ namespace Cress.Model
                 return;
             }
             DBManager.Instance.UpdateEmail(userSettings.EmailLabel.Text, view.Email);
+            view.ErrorLabel.Text = "Email Changed, Relogin";
             LogOut();
         }
     }

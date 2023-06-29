@@ -15,9 +15,10 @@ namespace Cress.Presenter
 {
     public class UserSettingsPresenter
     {
-        private readonly User _user;
-        private readonly IUserSettings _view;
+        private User _user;
+        private IUserSettings _view;
         private ChangeEmailDialogPresenter changeEmailDialogPresenter;
+        private ChangePasswordDialogPresenter changePasswordDialogPresenter;
         private Action LogOut;
 
         public UserSettingsPresenter(IUserSettings view, User user, Action logOut)
@@ -28,8 +29,6 @@ namespace Cress.Presenter
             //map actions
             _view.DeleteUser += DeleteUser;
             _view.ChangeUserPicture += ChangeUserPicture;
-            _view.ChangeUserEmail += ChangeUserEmail;
-            _view.ChangeUserPassword += ChangeUserPassword;
             _view.ChangePasswordDial += Change_Password_Dial;
             _view.ChangeEmailDial += Change_Email_Dial;
             //set username and email fields
@@ -38,20 +37,17 @@ namespace Cress.Presenter
             _view.PictureBox.Image = user.ProfilePicture;
         }
 
-        private void Change_Password_Dial(UserSettings userSettings)
+        private void Change_Password_Dial()
         {
-            /*var dialog = new ChangeEmailDialog(userSettings);
-            var presenter = new ChangeEmailDialogPresenter(dialog, _view);*/
+            var dialog = new ChangePasswordDialog();
+            changePasswordDialogPresenter = new ChangePasswordDialogPresenter(dialog, _view, LogOut);
+            dialog.Show();
         }
 
-        private void Change_Email_Dial(UserSettings userSettings)
+        private void Change_Email_Dial()
         {
             var dialog = new ChangeEmailDialog();
-
-            if (changeEmailDialogPresenter == null)
-            {
-                changeEmailDialogPresenter = new ChangeEmailDialogPresenter(dialog, _view, LogOut);
-            }
+            changeEmailDialogPresenter = new ChangeEmailDialogPresenter(dialog, _view, LogOut);
             dialog.Show();
         }
 
@@ -78,37 +74,6 @@ namespace Cress.Presenter
 
                 //then
                 _view.PictureBox.Image = new_picture;
-            }
-            catch (Exception e)
-            {
-                Environment.Exit(404);
-            }
-        }
-
-        private void ChangeUserEmail(string new_email)
-        {
-            try
-            {
-                //TODO
-                //check if email already exists in db if no
-                //set as new email
-                //logout
-            }
-            catch (Exception e)
-            {
-                Environment.Exit(404);
-            }
-        }
-        private void ChangeUserPassword(string old_password, string new_password)
-        {
-            try
-            {
-                //TODO
-                //check if old password matches new or messagebox
-                //set as new password
-
-                //then
-                MessageBox.Show("password", "Password Changed");
             }
             catch (Exception e)
             {

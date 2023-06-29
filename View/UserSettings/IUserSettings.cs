@@ -13,10 +13,8 @@ namespace Cress.View.UserSettings
         System.Windows.Forms.Label UsernameLabel { get; }
 
         event Action DeleteUser;
-        event Action<UserSettings> ChangePasswordDial;
-        event Action<UserSettings> ChangeEmailDial;
-        event Action<string, string> ChangeUserPassword;
-        event Action<string> ChangeUserEmail;
+        event Action ChangePasswordDial;
+        event Action ChangeEmailDial;
         event Action<string> ChangeUserPicture;
     }
 }

@@ -36,6 +36,8 @@
             this.new_pass2 = new System.Windows.Forms.TextBox();
             this.new_pass1 = new System.Windows.Forms.TextBox();
             this.error_label = new System.Windows.Forms.Label();
+            this.label_info = new System.Windows.Forms.Label();
+            this.passScore_bar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -96,22 +98,44 @@
             this.new_pass1.Name = "new_pass1";
             this.new_pass1.Size = new System.Drawing.Size(184, 20);
             this.new_pass1.TabIndex = 6;
+            this.new_pass1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.new_pass1_KeyUp);
             // 
             // error_label
             // 
             this.error_label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.error_label.AutoSize = true;
-            this.error_label.Location = new System.Drawing.Point(142, 185);
+            this.error_label.Location = new System.Drawing.Point(142, 209);
             this.error_label.Name = "error_label";
-            this.error_label.Size = new System.Drawing.Size(54, 13);
+            this.error_label.Size = new System.Drawing.Size(0, 13);
             this.error_label.TabIndex = 7;
-            this.error_label.Text = "Error label";
+            // 
+            // label_info
+            // 
+            this.label_info.AutoSize = true;
+            this.label_info.Location = new System.Drawing.Point(28, 22);
+            this.label_info.Name = "label_info";
+            this.label_info.Size = new System.Drawing.Size(354, 13);
+            this.label_info.TabIndex = 8;
+            this.label_info.Text = "Warning: After Changing Password You Will Be Automatically Logged Out";
+            // 
+            // passScore_bar
+            // 
+            this.passScore_bar.BackColor = System.Drawing.Color.White;
+            this.passScore_bar.ForeColor = System.Drawing.Color.Red;
+            this.passScore_bar.Location = new System.Drawing.Point(78, 168);
+            this.passScore_bar.Maximum = 6;
+            this.passScore_bar.Name = "passScore_bar";
+            this.passScore_bar.Size = new System.Drawing.Size(205, 23);
+            this.passScore_bar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.passScore_bar.TabIndex = 23;
             // 
             // ChangePasswordDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 361);
+            this.Controls.Add(this.passScore_bar);
+            this.Controls.Add(this.label_info);
             this.Controls.Add(this.error_label);
             this.Controls.Add(this.new_pass1);
             this.Controls.Add(this.new_pass2);
@@ -137,5 +161,7 @@
         private System.Windows.Forms.TextBox new_pass2;
         private System.Windows.Forms.TextBox new_pass1;
         private System.Windows.Forms.Label error_label;
+        private System.Windows.Forms.Label label_info;
+        private System.Windows.Forms.ProgressBar passScore_bar;
     }
 }

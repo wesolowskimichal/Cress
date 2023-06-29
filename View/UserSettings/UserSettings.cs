@@ -18,12 +18,10 @@ namespace Cress.View.UserSettings
         public System.Windows.Forms.Label EmailLabel => email_label;
         public System.Windows.Forms.Label UsernameLabel => username_label;
 
-        public event Action<UserSettings> ChangePasswordDial;
-        public event Action<UserSettings> ChangeEmailDial;
+        public event Action ChangePasswordDial;
+        public event Action ChangeEmailDial;
 
         public event Action DeleteUser;
-        public event Action<string, string> ChangeUserPassword;
-        public event Action<string> ChangeUserEmail;
         public event Action<string> ChangeUserPicture;
         #endregion
         public UserSettings()
@@ -57,7 +55,7 @@ namespace Cress.View.UserSettings
         {
             //TODO
             // dialog/messagebox co jest tam miejsce na nowego emaila
-            ChangeEmailDial?.Invoke(this);
+            ChangeEmailDial?.Invoke();
             
         }
 
@@ -65,18 +63,8 @@ namespace Cress.View.UserSettings
         {
             //TODO
             // dialog co jest tam miejsce na nowe i stare hasło
-            ChangePasswordDial?.Invoke(this);
+            ChangePasswordDial?.Invoke();
             
-        }
-
-        //te dwa gówna służą do przekazania wartości z ChangeEmailDialog i ChangePasswordDialog
-        public void set_new_password(string password, string new_password)
-        {
-            ChangeUserPassword?.Invoke(password, new_password);
-        }
-        public void set_new_email(string email)
-        {
-            ChangeUserEmail?.Invoke(email);
         }
     }
 }

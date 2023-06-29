@@ -14,12 +14,10 @@ namespace Cress.Presenter
     public class RegisterPresenter
     {
         private readonly IRegisterView view;
-        private readonly RegisterModel registerModel;
         private readonly Main main;
-        public RegisterPresenter(IRegisterView view, RegisterModel model, Main main)
+        public RegisterPresenter(IRegisterView view, Main main)
         {
             this.view = view;
-            this.registerModel = model;
             this.main = main;
             view.RegisterButtonClick += view_Register;
             view.ShowPassword += show_Password;
@@ -37,20 +35,20 @@ namespace Cress.Presenter
             string email = view.Email;
             string password = view.Password;
 
-            RegisterModel.RegStatus regStatus = registerModel.Authenticate(email, password);
+            PasswordChecker.RegStatus regStatus = PasswordChecker.Authenticate(email, password);
 
             switch (regStatus)
             {
-                case RegisterModel.RegStatus.W_USERNAME:
+                case PasswordChecker.RegStatus.W_USERNAME:
                     view.RegisterErrorLabel.Text = "User already exists!";
                     break;
-                case RegisterModel.RegStatus.ERROR:
+                case PasswordChecker.RegStatus.ERROR:
                     view.RegisterErrorLabel.Text = "Wrong syntax!";
                     break;
             }
-            if (regStatus == RegisterModel.RegStatus.SUCCESS)
+            if (regStatus == PasswordChecker.RegStatus.SUCCESS)
             {
-                if (RegisterModel.CheckStrength(view.Password) < 3)
+                if (PasswordChecker.CheckStrength(view.Password) < 3)
                 {
                     view.RegisterErrorLabel.Text = "Password too weak!";
                     return;
@@ -63,7 +61,7 @@ namespace Cress.Presenter
 
         private void check_PassScore()
         {
-            view.PassScore.Value = RegisterModel.CheckStrength(view.PasswordTextBox.Text);
+            view.PassScore.Value = PasswordChecker.CheckStrength(view.PasswordTextBox.Text);
             switch (view.PassScore.Value)
             {
                 case 0:

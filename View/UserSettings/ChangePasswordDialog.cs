@@ -14,24 +14,29 @@ namespace Cress.View.UserSettings
     {
         #region implementation of IChangeDialog
         public System.Windows.Forms.Label ErrorLabel => error_label;
+        public String OldPassword => old_pass.Text;
+        public String NewPassword => new_pass1.Text;
+        public String NewPasswordRetyped => new_pass2.Text;
+
+        public System.Windows.Forms.ProgressBar PassScore => passScore_bar;
+
+
+        public event Action ChangePassword;
+        public event Action PassKeyUp;
         #endregion
-        private readonly UserSettings _form;
-        public ChangePasswordDialog(UserSettings form)
+
+        public ChangePasswordDialog()
         {
             InitializeComponent();
-            _form = form;
         }
         private void chngPass_btn_Click(object sender, EventArgs e)
         {
-            //TODO
-            //regex do walidacji hasla
-            // if regex zly -> error_msg.Text = "error bo costam";
-            if (new_pass1.Text == new_pass2.Text)
-            {
-                _form.set_new_password(old_pass.Text, new_pass2.Text);
-                this.Close();
-            }
-            error_label.Text = "New passwords doesnt match";
+            ChangePassword?.Invoke();
+        }
+
+        private void new_pass1_KeyUp(object sender, KeyEventArgs e)
+        {
+            PassKeyUp?.Invoke();
         }
     }
 }

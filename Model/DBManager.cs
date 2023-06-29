@@ -499,5 +499,39 @@ namespace Cress.Model
                 }
             }
         }
+
+        public void UpdatePassword(string username, string new_password)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"UPDATE users SET password = @new_password WHERE username = @username;";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@new_password", new_password);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public bool CheckExistance(string username, string password)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT COUNT(*) AS count FROM users WHERE username = @username AND password = @password;";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@password", password);
+                    return (long)command.ExecuteScalar() == 1;
+                }
+            }
+        }
     }
 }

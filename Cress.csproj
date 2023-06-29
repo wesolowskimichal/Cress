@@ -95,14 +95,16 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\ChangePasswordModel.cs" />
     <Compile Include="Presenter\ChangeEmailDialogPresenter.cs" />
     <Compile Include="Model\ChatRoomModel.cs" />
     <Compile Include="Model\ContactModel.cs" />
     <Compile Include="Model\DBManager.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MessageModel.cs" />
-    <Compile Include="Model\RegisterModel.cs" />
+    <Compile Include="Model\PasswordChecker.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Presenter\ChangePasswordDialogPresenter.cs" />
     <Compile Include="Presenter\ChatRoomPresenter.cs" />
     <Compile Include="Presenter\CreateChatRoomPresenter.cs" />
     <Compile Include="Presenter\LoginPresenter.cs" />
@@ -194,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserSettings\ChangeEmailDialog.resx">
       <DependentUpon>ChangeEmailDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserSettings\ChangePasswordDialog.resx">
+      <DependentUpon>ChangePasswordDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserSettings\UserSettings.resx">
       <DependentUpon>UserSettings.cs</DependentUpon>

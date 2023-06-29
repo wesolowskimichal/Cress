@@ -17,7 +17,6 @@ namespace Cress
         public Model.User user;
         private Presenter.ChatRoomPresenter chatRoomPresenter;
         private Presenter.CreateChatRoomPresenter createChatRoomPresenter;
-        private Presenter.LoginPresenter loginPresenter;
         private Presenter.RegisterPresenter registerPresenter;
 
         public Main()
@@ -28,7 +27,7 @@ namespace Cress
             createChatRoomView1.Visible = false;
             var view = loginViewController1;
             var model = new Model.LoginModel();
-            loginPresenter = new Presenter.LoginPresenter(view, model, this);
+            var loginPresenter = new Presenter.LoginPresenter(view, model, this);
         }
 
         public void LoggedIn()
@@ -58,13 +57,14 @@ namespace Cress
             createChatRoomView1.Visible = false;
 
             chatRoomView1.Clear();
+            Application.Restart();
         }
 
         public void Registration()
         {
             if(registerPresenter == null)
             {
-                registerPresenter = new Presenter.RegisterPresenter(registerView1, new Model.RegisterModel(), this);
+                registerPresenter = new Presenter.RegisterPresenter(registerView1, this);
             }
             registerView1.Visible = true;
         }
